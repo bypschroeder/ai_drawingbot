@@ -10,17 +10,13 @@ svg_path = "output/vector.svg"
 img = cv2.imread(image_path)
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-# Rauschunterdrückung ohne Detailverlust
 smooth = cv2.bilateralFilter(gray, d=9, sigmaColor=75, sigmaSpace=75)
 
-# Canny: zwei Varianten mit unterschiedlicher Empfindlichkeit
-edges_strong = cv2.Canny(smooth, 100, 200)  # klare Hauptkanten
-edges_soft = cv2.Canny(smooth, 30, 100)  # feinere Kanten
+edges_strong = cv2.Canny(smooth, 100, 200)
+edges_soft = cv2.Canny(smooth, 30, 100)
 
-# Kanten zusammenführen
 combined_edges = cv2.bitwise_or(edges_strong, edges_soft)
 
-# Optional: Lücken glätten
 kernel = np.ones((2, 2), np.uint8)
 combined_edges = cv2.dilate(combined_edges, kernel, iterations=1)
 combined_edges = cv2.erode(combined_edges, kernel, iterations=1)
