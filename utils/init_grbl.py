@@ -31,7 +31,7 @@ def set_grbl_settings(file_path, grbl):
         time.sleep(0.1)
 
 
-def init_grbl_streamer(baudrate):
+def init_grbl_streamer(baudrate, settings_path):
     available_ports = list_serial_ports()
     if not available_ports:
         print("No serial ports found!")
@@ -40,7 +40,7 @@ def init_grbl_streamer(baudrate):
     grbl = GrblStreamer(my_callback)
     grbl.setup_logging()
 
-    set_grbl_settings("./resources/grbl_settings.txt", grbl)
+    set_grbl_settings(settings_path, grbl)
 
     port = available_ports[-1]
     grbl.cnect(port, baudrate)

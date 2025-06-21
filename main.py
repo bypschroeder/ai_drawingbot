@@ -11,13 +11,13 @@ parser = argparse.ArgumentParser()
 args = parser.parse_args()
 
 # Init GRBL
-grbl = init_grbl_streamer(BAUDRATE)
+grbl = init_grbl_streamer(BAUDRATE, "./resources/grbl_settings.txt")
 
 # Set GRBL home
-grbl.send_immediately("G92.1")  # 1. Clear any G92 offsets
-grbl.send_immediately("G10 P0 L2 X0 Y0")  # 2. Reset work offset to machine zero
-grbl.send_immediately("G54")  # 3. Select default coordinate system
-grbl.send_immediately("G90")  # 4. Absolute positioning
+grbl.send_immediately("G92.1")  # Clear any G92 offsets
+grbl.send_immediately("G10 P0 L2 X0 Y0")  # Reset work offset to machine zero
+grbl.send_immediately("G54")  # Select default coordinate system
+grbl.send_immediately("G90")  # Absolute positioning
 
 # Convert input image to gcode
 svg = image_to_svg_outline(INPUT_IMG)

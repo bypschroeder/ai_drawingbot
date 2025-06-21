@@ -1,6 +1,9 @@
+certifi==2025.6.15
+charset-normalizer==3.4.2
 future==1.0.0
 gcode-machine==1.0.3
 grbl-streamer==2.0.2
+idna==3.10
 imageio==2.37.0
 iso8601==2.1.0
 lazy_loader==0.4
@@ -11,9 +14,11 @@ packaging==24.2
 pillow==11.2.1
 pyserial==3.5
 PyYAML==6.0.2
+requests==2.32.4
 scikit-image==0.25.2
 scipy==1.15.2
 serial==0.0.97
 svg-to-gcode==1.5.4
 svgwrite==1.4.3
 tifffile==2025.3.30
+urllib3==2.5.0

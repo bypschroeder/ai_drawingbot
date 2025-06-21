@@ -9,7 +9,7 @@ def image_to_svg_outline(
     canny_soft=(30, 100),
     bilateral_params=(9, 75, 75),
     kernel_size=(2, 2),
-    stroke_width=4,
+    stroke_width=2,
 ):
     img = cv2.imread(image_path)
     if img is None:
@@ -42,3 +42,10 @@ def image_to_svg_outline(
         )
 
     return dwg.tostring()
+
+
+if __name__ == "__main__":
+    result = image_to_svg_outline("output_image.png")
+    with open("output_image.svg", "w") as f:
+        f.write(result)
+    print("SVG file saved as output_image.svg")

@@ -88,3 +88,11 @@ def stream_gcode(grbl, gcode):
             print(f"Sending: {cleaned_line}")
             grbl.send_immediately(cleaned_line)
             time.sleep(0.1)
+
+
+if __name__ == "__main__":
+    with open("./resources/images/output.svg", "r", encoding="utf-8") as f:
+        svg_string = f.read()
+    result = convert_svg_to_gcode(svg_string)
+    with open("./resources/images/output.gcode", "w", encoding="utf-8") as f:
+        f.write(result)
