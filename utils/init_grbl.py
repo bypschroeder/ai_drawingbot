@@ -47,4 +47,7 @@ def init_grbl_streamer(baudrate, settings_path):
 
     grbl.poll_start()
 
+    while not grbl.is_connected():
+        time.sleep(0.1)
+
     return grbl
