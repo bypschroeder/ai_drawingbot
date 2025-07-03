@@ -31,7 +31,18 @@ def set_grbl_settings(file_path, grbl):
         time.sleep(0.1)
 
 
-def init_grbl_streamer(baudrate, settings_path):
+def init_grbl_streamer(baudrate: int, settings_path: str):
+    """
+    Initializes and connects a Arduino as a GrblStreamer instance to the last available serial port.
+
+    Args:
+        baudrate (int): The baudrate for the serial connection to the GRBL device.
+        settings_path (str): Path to the GRBL settings file.
+
+    Returns:
+        GrblStreamer: The initialized and connected GrblStreamer instance.
+    """
+
     available_ports = list_serial_ports()
     if not available_ports:
         print("No serial ports found!")

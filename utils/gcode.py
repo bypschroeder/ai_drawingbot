@@ -2,10 +2,19 @@ import time
 import subprocess
 import tempfile
 import re
+from grbl_streamer import GrblStreamer
 
 
-# https://github.com/bdring/Grbl_Pen_Servo
-def convert_svg_to_gcode(svg_string):
+def convert_svg_to_gcode(svg_string: str):
+    """
+    This function first optimizes  the SVG using 'vpype' with several processing steps (linemerge, linesort, reloop, linesimplify) and then converts it into gcode using the 'vpype-gcode' plugin.
+
+    Args:
+        svg_string (str): The SVG content to be converted.
+
+    Returns:
+        str: The resulting G-code as a string.
+    """
     with tempfile.NamedTemporaryFile(
         suffix=".svg", delete=True
     ) as svg_temp, tempfile.NamedTemporaryFile(
@@ -40,10 +49,23 @@ def convert_svg_to_gcode(svg_string):
     return gcode_string
 
 
-def scale_gcode(gcode_str, max_x, max_y, margin=8):
+def scale_gcode(gcode: str, max_x: float, max_y: float, margin=8):
+    """
+    Scales the entered gcode to fit within a specified drawing area.
+
+    Args:
+        gcode (str): The input G-code as a string.
+        max_x (float): The maximum allowed X dimension for the drawing area.
+        max_y (float): The maximum allowed Y dimension for the drawing area.
+        margin (float, optional): The margin to leave on all sides (default is 8).
+
+    Returns:
+        str: The scaled G-code as a string.
+    """
+
     x_coords = []
     y_coords = []
-    for line in gcode_str.splitlines():
+    for line in gcode.splitlines():
         match_x = re.search(r"X([0-9.]+)", line)
         match_y = re.search(r"Y([0-9.]+)", line)
         if match_x:
@@ -52,7 +74,7 @@ def scale_gcode(gcode_str, max_x, max_y, margin=8):
             y_coords.append(float(match_y.group(1)))
 
     if not x_coords or not y_coords:
-        return gcode_str
+        return gcode
 
     min_x, max_x_gcode = min(x_coords), max(x_coords)
     min_y, max_y_gcode = min(y_coords), max(y_coords)
@@ -74,7 +96,7 @@ def scale_gcode(gcode_str, max_x, max_y, margin=8):
         return new_x, new_y
 
     scaled_lines = []
-    for line in gcode_str.splitlines():
+    for line in gcode.splitlines():
         match_x = re.search(r"X([0-9.]+)", line)
         match_y = re.search(r"Y([0-9.]+)", line)
         if match_x or match_y:
@@ -95,7 +117,18 @@ def scale_gcode(gcode_str, max_x, max_y, margin=8):
     return "\n".join(scaled_lines)
 
 
-def stream_gcode(grbl, gcode):
+def stream_gcode(grbl: GrblStreamer, gcode: str):
+    """
+    Streams G-code to a connected GRBL device and waits for the job to finish.
+
+    Args:
+        grbl (GrblStreamer): An initialized and connected GrblStreamer instance.
+        gcode (str): The G-code to be sent to the device.
+
+    Returns:
+        None
+    """
+
     with tempfile.NamedTemporaryFile("w+", delete=False, suffix=".gcode") as tmp:
         tmp.write(gcode)
         tmp.flush()

@@ -2,7 +2,17 @@ import requests
 import os
 
 
-def generate_line_art_image(first_word):
+def generate_line_art_image(first_word: str):
+    """
+    Generates a
+    Generates a minimalistic line art image based on a given word using the LUIS model via its API.
+
+    Args:
+        first_word (str): The main subject or concept to be illustrated in the line art.
+
+    Returns:
+        str: A base64-encoded string representing the generated image.
+    """
     api_url = os.getenv("API_URL")
 
     prompt = (

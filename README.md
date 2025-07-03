@@ -32,7 +32,14 @@ venv/Scripts/activate
 pip install -r requirements.txt
 ```
 
-4. **Flash the Arduino with the customized Firmware**
+4. **Create a `.env` file in the project root and add the following variables**
+
+```
+API_URL="https://your-ai-model-api-endpoint"
+BAUDRATE=115200  # Adjust this value if your hardware requires a different baud rate
+```
+
+5. **Flash the Arduino with the customized Firmware**
 
 - Copy the `grbl` folder from this repository to your Arduino libraries directory (typically located at `~/Arduino/libraries` on Linux/macOS or `Documents\Arduino\libraries\ on Window`)
 - Open the Arduino IDE
@@ -46,6 +53,8 @@ pip install -r requirements.txt
 The plotter itself was built following this [tutorial](https://test3dprints.com/arduino/homework-writing-machine/).
 
 Some adjustments needed to be made, for example increasing the diameter of some holes.
+
+The firmware for this specific plotter was customized by enabling CoreXY kinematics and adding support for Z-axis control using a servo motor. This functionality was integrated with the help of the [Grbl_Pen_Servo repository](https://github.com/bdring/Grbl_Pen_Servo).
 
 ## Usage
 
