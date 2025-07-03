@@ -14,14 +14,16 @@ base64 = generate_line_art_image(keyword)
 
 # Convert generated image to svg
 svg = convert_base64_to_svg(base64)
-with open("output/svg.svg", "w") as f:
-    f.write(svg)
+# Save svg if wanted
+# with open("output/svg.svg", "w") as f:
+#     f.write(svg)
 
 # Convert svg to gcode
 gcode = convert_svg_to_gcode(svg)
 scaled_gcode = scale_gcode(gcode, max_x=50, max_y=50, margin=8)
-with open("output/gcode.gcode", "w") as f:
-    f.write(scaled_gcode)
+# Save gcode if wanted
+# with open("output/gcode.gcode", "w") as f:
+#     f.write(scaled_gcode)
 
 # Init GRBL
 grbl = init_grbl_streamer(os.getenv("BAUDRATE"), "./grbl_settings.txt")
