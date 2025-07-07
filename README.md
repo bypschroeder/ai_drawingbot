@@ -41,7 +41,7 @@ BAUDRATE=115200  # Adjust this value if your hardware requires a different baud 
 
 5. **Flash the Arduino with the customized Firmware**
 
-- Copy the `grbl` folder from this repository to your Arduino libraries directory (typically located at `~/Arduino/libraries` on Linux/macOS or `Documents\Arduino\libraries\ on Window`)
+- Copy the `grbl` folder from this repository to your Arduino libraries directory (typically located at `Documents/Arduino/libraries`)
 - Open the Arduino IDE
 - In the IDE, open the `grblUpload` sketch from `File > Examples > grbl`
 - Connect the Arduino to your computer
