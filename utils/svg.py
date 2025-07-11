@@ -36,7 +36,7 @@ def get_bounding_box(path):
     return min_x, min_y, max_x, max_y
 
 
-def convert_base64_to_svg(base64: str):
+def convert_base64_to_svg(base64_str: str):
     """
     Converts a base64-encoded image to SVG using Potrace.
 
@@ -47,7 +47,7 @@ def convert_base64_to_svg(base64: str):
         str: SVG markup as a string representing the vectorized image.
     """
 
-    img_bytes = base64.b64decode(base64)
+    img_bytes = base64.b64decode(base64_str)
     img = Image.open(BytesIO(img_bytes)).convert("L")
 
     img = img.point(lambda x: 0 if x < 128 else 255, "1")
