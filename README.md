@@ -1,6 +1,6 @@
 # AI-Drawingbot
 
-The AI-Drawingbot is an interactive system that transforms text prompts into physical line drawings. It uses the LUIS image generation API from Hof University to create images based on user input. These images are then converted into vector-friendly line art and plotted onto paper using a custom-built XY-plotter made from 3D-printed parts and controlled by an Arduino.
+The AI-Drawingbot is an interactive system that transforms text prompts into physical line drawings. It uses the LUIS image generation API from Hof University to create images based on user input. These images are then converted into vector graphics and plotted onto paper using a custom-built XY-plotter made from 3D-printed parts and controlled by an Arduino.
 
 ## Installation
 
@@ -67,9 +67,3 @@ python main.py
 After running the script, you will be prompted to enter what you want the robot to draw. Once you confirm your input, the system will automatically handle all necessary processing and stream the drawing instructions to the plotter.
 
 No further manual intervention is required.
-
-## Demo
-
-Here is a short video demonstrating the software and the drawing with the plotter.
-
-Some more results we have drawn with the built plotter.
